@@ -5,7 +5,7 @@
 		padding: 16px 0;
 	}
 
-	&Container {
+	.container {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		align-items: center;
@@ -15,7 +15,7 @@
 		}
 	}
 
-	&Phone {
+	.phone {
 		font-weight: 600;
 		font-size: 14px;
 		line-height: 17px;
@@ -31,7 +31,7 @@
 		}
 	}
 
-	&Logo {
+	.logo {
 		justify-self: center;
 
 		@media (max-width: 768px) {
@@ -44,11 +44,11 @@
 		}
 	}
 
-	&Navigation {
+	.navigation {
 		justify-self: end;
 	}
 
-	&NavList {
+	.navList {
 		display: flex;
 		align-items: center;
 		gap: 24px;
@@ -58,7 +58,7 @@
 		}
 	}
 
-	&Link {
+	.link {
 		position: relative;
 		transition: color 0.3s ease-in-out;
 
@@ -67,7 +67,7 @@
 		}
 	}
 
-	&LinkCount {
+	.linkCount {
 		position: absolute;
 		display: block;
 		width: 18px;
