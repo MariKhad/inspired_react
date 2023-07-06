@@ -1,13 +1,14 @@
+import { Container } from "../../Layout/Container/Container";
 import { Category } from "./Category/Category";
-import { Gender } from "./Gender/Gender";
+import { Gender } from './Gender/Gender';
 
 
 
 export const Navigation = () => (
 	<nav>
-		<div className="container">
+		<Container>
 			<Gender />
 			<Category />
-		</div>
+		</Container>
 	</nav>
 );
