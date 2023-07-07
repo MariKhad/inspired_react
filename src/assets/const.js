@@ -1,21 +1,10 @@
-/* export const catalog = {
-	'Жeнщины': ['Бюстгальтеры',
-		'Трусы',
-		'Носки',
-		'Халаты',
-		'Теробелье',
-		'Пижамы'],
-	'Мужчины': ['Трусы',
-		'Носки',
-		'Халаты',
-		'Термобелье'],
-	'Дети': ['Трусы',
-		'Носки'],
-	'Младенцы': ['Трусы',
-		'Носки',
-		'Термобелье',
-		'Боди']
-} */
+
+export const API_URL = 'http://localhost:8024';
+export const GOODS_URL = `${API_URL}/api/goods`;
+export const CATEGORY_URL = `${API_URL}/api/categories`;
+export const COLORS_URL = `${API_URL}/api/colors`;
+//const GOODS_URL = `${API_URL}/api/goods?[param]`;
+
 
 export const catalog = [
 	{
@@ -46,7 +35,7 @@ export const catalog = [
 	},
 
 	{
-		gender: 'children',
+		gender: 'kids',
 		title: 'Дети',
 		list: [
 			{ link: 'underwear', title: 'Трусы', },
