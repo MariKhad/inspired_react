@@ -3,7 +3,7 @@ import s from '../Footer.module.scss';
 import { useSelector } from "react-redux";
 
 export const Categories = () => {
-	const { activeGender, genderList, categories } = useSelector(state => state.navigation)
+	const { genderList, categories } = useSelector(state => state.navigation)
 
 	return (
 		<ul className={s.categoryList}>
@@ -15,7 +15,7 @@ export const Categories = () => {
 					<ul className={s.categorySublist}>
 						{categories[gender].list.map((item) => (
 							<li key={item.slug}>
-								<NavLink className={s.link} to={`${activeGender}/${item.slug}`}>{item.title}</NavLink>
+								<NavLink className={s.link} to={`${gender}/${item.slug}`}>{item.title}</NavLink>
 							</li>
 						)
 						)}
