@@ -14,7 +14,6 @@ const colorsSlice = createSlice({
 	name: 'colors',
 	initialState: {
 		status: 'idle',
-		colors: {},
 		colorList: [],
 		error: null,
 	},
@@ -25,8 +24,7 @@ const colorsSlice = createSlice({
 			})
 			.addCase(fetchColors.fulfilled, (state, action) => {
 				state.status = 'success';
-				state.colors = action.payload;
-				state.colorList = [...action.payload].forEach(element => console.log(element.title));
+				state.colorList = action.payload;
 			})
 			.addCase(fetchColors.rejected, (state, action) => {
 				state.status = 'failed';

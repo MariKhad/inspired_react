@@ -16,6 +16,7 @@ import { fetchNavigation } from "./features/navigationSlice";
 import { fetchColors } from "./features/colorsSlice";
 
 
+
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Root />}>
@@ -36,11 +37,8 @@ export const App = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(fetchNavigation())
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(fetchColors())
+		dispatch(fetchNavigation());
+		dispatch(fetchColors());
 	}, [dispatch]);
 
 	return <RouterProvider router={router}></RouterProvider>

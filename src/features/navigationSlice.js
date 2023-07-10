@@ -41,6 +41,6 @@ const navigationSlice = createSlice({
 	}
 });
 
-export const { setActiveGender } = navigationSlice.actions;
+export const { setActiveGender, activeGender } = navigationSlice.actions;
 
 export default navigationSlice.reducer;
