@@ -14,6 +14,7 @@ const colorsSlice = createSlice({
 	name: 'colors',
 	initialState: {
 		status: 'idle',
+		activeColor: '',
 		colorList: [],
 		error: null,
 	},
