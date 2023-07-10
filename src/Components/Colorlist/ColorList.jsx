@@ -7,7 +7,10 @@ export const ColorList = ({ colors }) => {
 	return (
 		<ul className={s.colorList}>
 			{colors?.map((id, i) => {
-				const color = colorList?.find(color => color.id === id)
+				const color = colorList?.find(color => color.id === id);
+				document.body.style.setProperty('--data-color', color?.code);
+				console.log('color?.code: ', color?.code);
+
 				return (
 					<Color key={id} color={color?.code} check={!i} />
 				)
