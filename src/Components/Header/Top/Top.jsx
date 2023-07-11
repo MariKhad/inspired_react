@@ -8,7 +8,7 @@ export const Top = () => (
 	<div className={s.top}>
 		<Container className={s.container}>
 			<a className={cn(s.link, s.phone)} href='tel:8 930 490 26 20'>8 930 490 26 20</a>
-			<a className={s.logo} href='/'>
+			<a className={s.logo} href='/catalog/women'>
 				<img src={logo} alt='Логотип Inspired' />
 			</a>
 			<div className={s.navigation}>
