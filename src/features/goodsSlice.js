@@ -59,10 +59,13 @@ const goodsSlice = createSlice({
 			})
 			.addCase(fetchCategory.rejected, (state, action) => {
 				state.status = 'failed';
+				state.goodsList = [];
 				state.error = action.error.message;
 			})
 
 	}
 });
+
+export const { setActiveBackground, activeBackground } = goodsSlice.actions;
 
 export default goodsSlice.reducer;

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import { Container } from '../Layout/Container/Container';
+import { Container } from '../../Layout/Container/Container';
 import s from './Banner.module.scss';
-import { API_URL } from '../../assets/const';
+import { API_URL } from '../../../assets/const';
 import { useEffect, useState } from 'react';
 import { useMedia } from 'react-use';
 
@@ -10,26 +10,26 @@ export const Banner = ({ data }) => {
 	const isTablet = useMedia('(max-width: 768px)');
 	const isLaptop = useMedia('(max-width: 1024px)');
 
-	/* const { backgroundImg, setBackgroundImg } = useState('');
-	console.log('backgroundImg: ', backgroundImg);
+	const [background, setBackground] = useState('');
+
 
 	useEffect(() => {
 		if (isMobile) {
-			setBackgroundImg(data?.bg?.mobile);
+			setBackground(data?.bg?.mobile);
 		} else if (isTablet) {
-			setBackgroundImg(data?.bg?.tablet);
+			setBackground(data?.bg?.tablet);
 		} else if (isLaptop) {
-			setBackgroundImg(data?.bg?.laptop);
+			setBackground(data?.bg?.laptop);
 		} else {
-			setBackgroundImg(data?.bg?.desktop);
+			setBackground(data?.bg?.desktop);
 		}
-	}, [isMobile, isTablet, isLaptop]); */
+	}, [isMobile, isTablet, isLaptop, data]);
 
 
 	return (
 		data &&
 		<section className={s.banner} style={{
-			backgroundImage: `url(${API_URL}/${data?.bg?.desktop})`
+			backgroundImage: `url(${API_URL}/${background})`
 		}}>
 			<Container>
 				<div className={s.content}>

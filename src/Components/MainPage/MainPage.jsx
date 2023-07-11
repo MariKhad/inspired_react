@@ -4,16 +4,17 @@ import { fetchCategory, fetchGender } from '../../features/goodsSlice';
 import { setActiveGender } from '../../features/navigationSlice';
 import { Goods } from '../Goods/Goods';
 import { useParams } from 'react-router-dom';
-import { Banner } from '../Banner/Banner';
+import { Banner } from './Banner/Banner';
 
 export const MainPage = () => {
+
 	const dispatch = useDispatch();
 	const { gender, category } = useParams();
 	const { activeGender, categories } = useSelector(state => state.navigation);
 
 	const genderData = categories[activeGender];
-	console.log(genderData)
 	const categoryData = genderData?.list.find(item => item.slug === category)
+
 	useEffect(() => {
 		dispatch(setActiveGender(gender));
 	}, [gender, dispatch]);
@@ -28,12 +29,25 @@ export const MainPage = () => {
 			dispatch(fetchGender(gender));
 			return
 		}
+		if (!gender) {
+			dispatch(fetchGender('women'))
+			window.location.href = 'catalog/women'
+		}
 	}, [gender, category, dispatch]);
 
-	return (
-		<>
-			<Banner data={genderData?.banner} />
-			<Goods categoryData={categoryData} />
-		</>
-	)
+
+	if (!category) {
+		return (
+			<>
+				<Banner data={genderData?.banner} />
+				<Goods categoryData={categoryData} />
+			</>
+		)
+	} else {
+		return (
+			<>
+				<Goods categoryData={categoryData} />
+			</>
+		)
+	}
 };
