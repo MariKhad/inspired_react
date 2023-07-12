@@ -10,14 +10,20 @@ export const MainPage = () => {
 
 	const dispatch = useDispatch();
 	const { gender, category } = useParams();
-	const { activeGender, categories } = useSelector(state => state.navigation);
+
+	const { activeGender, categories, genderList } = useSelector(state => state.navigation);
 
 	const genderData = categories[activeGender];
 	const categoryData = genderData?.list.find(item => item.slug === category)
 
 	useEffect(() => {
-		dispatch(setActiveGender(gender));
-	}, [gender, dispatch]);
+		if (gender) {
+			dispatch(setActiveGender(gender));
+		} else if (genderList[0]) {
+			dispatch(setActiveGender(genderList[0]));
+			dispatch(fetchGender(genderList[0]));
+		}
+	}, [gender, genderList, dispatch]);
 
 
 	useEffect(() => {
@@ -27,27 +33,14 @@ export const MainPage = () => {
 		}
 		if (gender) {
 			dispatch(fetchGender(gender));
-			return
-		}
-		if (!gender) {
-			dispatch(fetchGender('women'))
-			window.location.href = 'catalog/women'
 		}
 	}, [gender, category, dispatch]);
 
 
-	if (!category) {
-		return (
-			<>
-				<Banner data={genderData?.banner} />
-				<Goods categoryData={categoryData} />
-			</>
-		)
-	} else {
-		return (
-			<>
-				<Goods categoryData={categoryData} />
-			</>
-		)
-	}
+	return (
+		<>
+			{!category && <Banner data={genderData?.banner} />}
+			<Goods categoryData={categoryData} />
+		</>
+	)
 };
