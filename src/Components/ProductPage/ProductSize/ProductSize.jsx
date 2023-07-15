@@ -8,13 +8,12 @@ export const ProductSize = ({ sizeList }) => {
 
 	const handleSizeChange = (e) => {
 		setSelectedSize(e.target.value)
-		console.log('selectedSize: ', selectedSize);
 	}
 
 	return (
 		<div className={s.size}>
 			<p className={s.title}>Цвет</p>
-			<ul className={s.list}>
+			<div className={s.list}>
 				{sizeList?.map((size, i) => {
 					return (
 						<li key={i} >
@@ -31,7 +30,7 @@ export const ProductSize = ({ sizeList }) => {
 						</li>
 					)
 				})}
-			</ul>
+			</div>
 		</div>
 	)
 }

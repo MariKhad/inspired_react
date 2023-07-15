@@ -1,0 +1,14 @@
+.like {
+	color: transparent;
+	transition: color 0.3s ease-in-out;
+
+	&:hover {
+		color: rgb(241, 130, 152);
+	}
+}
+
+
+
+.active {
+	color: crimson;
+}

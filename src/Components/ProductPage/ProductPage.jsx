@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../assets/const";
 import { ColorList } from "../Colorlist/ColorList";
-import { ReactComponent as Like } from "../../assets/Like.svg";
 import { Count } from "../Count/Count";
-import { ProductSize } from "../ProductSize/ProductSize";
+import { ProductSize } from "./ProductSize/ProductSize";
 import { TopGoods } from "../TopGoods/TopGoods";
 import { setActiveGender } from "../../features/navigationSlice";
 import { useMedia } from "react-use";
+import { BtnLike } from "../BtnLike/BtnLike";
 
 export const ProductPage = () => {
 	const dispatch = useDispatch();
@@ -95,7 +95,7 @@ export const ProductPage = () => {
 								handleDecrement={handleDecrement}
 							/>
 							<button type='submit' className={s.addCart}>в корзину</button>
-							<button className={s.favorite} aria-label='Добавить в избранное' type="button"><Like /></button>
+							<BtnLike id={id} />
 						</div>
 					</form>
 				</Container>

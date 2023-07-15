@@ -83,4 +83,18 @@
 		font-size: 9px;
 		line-height: 18px;
 	}
+
+	.like {
+		color: transparent;
+
+		&:hover {
+			color: rgb(241, 130, 152);
+		}
+
+		&:active {
+			color: crimson;
+		}
+
+	}
+
 }
