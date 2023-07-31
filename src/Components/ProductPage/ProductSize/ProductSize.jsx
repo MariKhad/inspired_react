@@ -2,13 +2,7 @@ import { useState } from 'react';
 import s from './ProductSize.module.scss';
 
 
-export const ProductSize = ({ sizeList }) => {
-
-	const [selectedSize, setSelectedSize] = useState('');
-
-	const handleSizeChange = (e) => {
-		setSelectedSize(e.target.value)
-	}
+export const ProductSize = ({ sizeList, handleSizeChange, selectedSize }) => {
 
 	return (
 		<div className={s.size}>

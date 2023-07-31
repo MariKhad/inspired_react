@@ -10,7 +10,6 @@ export const BtnLike = ({ id }) => {
 
 
 	const handleToggleFavorite = () => {
-		console.log('isFavorite: ', isFavorite);
 		if (isFavorite) {
 			dispatch(removeFromFavorites({ id }))
 		} else {

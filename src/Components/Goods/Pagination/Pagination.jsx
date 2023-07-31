@@ -2,32 +2,35 @@ import { NavLink, useLocation, useParams } from 'react-router-dom';
 import s from './Pagintaion.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
-import { fetchCategory, setPage } from '../../../features/goodsSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 export const Pagination = () => {
+	const [pagePagination, setPagePagination] = useState('');
 	const pathname = useLocation().pathname;
 	const { page, pages } = useSelector(state => state.goods);
-	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setPagePagination(page)
+	}, [page]);
 
 	const { gender, category } = useParams();
 
 	const param = { gender, category };
 
 	const handlePageChange = newPage => {
-		dispatch(setPage(newPage))
+		setPagePagination(newPage)
 	}
 
 	const handlePrevPage = () => {
-		if (page > 1) {
-			handlePageChange(page - 1);
+		if (pagePagination > 1) {
+			handlePageChange(pagePagination - 1);
 		}
 	}
 	const handleNextPage = () => {
-		if (page < pages) {
-			handlePageChange(page + 1);
+		if (pagePagination < pages) {
+			handlePageChange(pagePagination + 1);
 		}
 	}
 
@@ -35,11 +38,11 @@ export const Pagination = () => {
 	const renderPaginationItems = () => {
 		const paginationItems = [];
 
-		let startPage = Math.max(1, page - 1);
+		let startPage = pagePagination === pages && pages > 2
+			? pagePagination - 2
+			: Math.max(1, pagePagination - 1);
 		let endPage = Math.min(startPage + 2, pages);
-		if (page === pages && page !== 1) {
-			startPage = startPage - 1;
-		}
+
 
 
 		for (let i = startPage; i <= endPage; i++) {
@@ -47,7 +50,7 @@ export const Pagination = () => {
 				<li key={i} className={s.item}>
 					<NavLink
 						to={`${pathname}?page=${i}`}
-						className={cn(s.link, i === +page && page === 1 && s.linkActive)}
+						className={cn(s.link, i === pagePagination ?? s.linkActive)}
 						onClick={() => handlePageChange(i)}>
 						{i}
 					</NavLink>
@@ -59,28 +62,22 @@ export const Pagination = () => {
 
 	if (pages > 1) {
 		return (<div className={s.pagination}>
-			<NavLink to={`${pathname}?page=${page - 1}`}
-				className={cn(s.arrow, (page === 1) ? s.disabled : '')}
-				onClick={handlePrevPage}>
+			<button to={`${pathname}?page=${pagePagination - 1}`}
+				className={s.arrow}
+				onClick={handlePrevPage}
+				disabled={pagePagination <= 2}>
 				&lt;
-			</NavLink>
+			</button>
 			<ul className={s.list}>
 				{renderPaginationItems()}
 			</ul>
-			<NavLink to={`${pathname}?page=${page + 1}`}
-				className={cn(s.arrow, (page === pages && page !== 1) ? s.disabled : '')}
+			<button to={`${pathname}?page=${pagePagination + 1}`}
+				className={s.arrow}
 				onClick={handleNextPage}
+				disabled={pagePagination === pages && pagePagination >= pages - 1}
 			>&gt;
-			</NavLink>
-		</div>
-		)
-	} else {
-		return (
-			<div className={s.pagination}>
-				<ul className={s.list}>
-					{renderPaginationItems()}
-				</ul>
-			</div >
+			</button>
+		</div >
 		)
 	}
 }

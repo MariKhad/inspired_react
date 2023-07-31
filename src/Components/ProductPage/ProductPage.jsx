@@ -13,15 +13,19 @@ import { TopGoods } from "../TopGoods/TopGoods";
 import { setActiveGender } from "../../features/navigationSlice";
 import { useMedia } from "react-use";
 import { BtnLike } from "../BtnLike/BtnLike";
+import { addToCart } from "../../features/cartSlice";
 
 export const ProductPage = () => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const { product } = useSelector(state => state.product);
+	const { colors } = product;
 	const [count, setCount] = useState(1);
 	const [goodsCount, setGoodsCount] = useState(4);
 	const isLowerBound = useMedia('(min-width: 940px)');
 	const isUpperBound = useMedia('(max-width: 1239px)');
+	const { colorList } = useSelector(state => state.colors);
+
 
 	useEffect(() => {
 		dispatch(setActiveGender(product?.gender));
@@ -60,6 +64,18 @@ export const ProductPage = () => {
 		console.log('selectedColor: ', selectedColor);
 	}
 
+	const [selectedSize, setSelectedSize] = useState('');
+
+	const handleSizeChange = (e) => {
+		setSelectedSize(e.target.value)
+	}
+
+	useEffect(() => {
+		if (colorList?.length && colors?.length) {
+			setSelectedColor(colorList.find(color => color?.id === colors[0]).title);
+		}
+	}, [colorList, colors])
+
 	useEffect(() => {
 		dispatch(fetchProduct(id))
 	}, [id, dispatch]);
@@ -69,7 +85,14 @@ export const ProductPage = () => {
 			<section className={s.card} >
 				<Container className={s.container}>
 					<img src={`${API_URL}/${product?.pic}`} alt={`${product?.title}`} className={s.image} />
-					<form className={s.content}>
+					<form className={s.content} onSubmit={(e) => {
+						e.preventDefault();
+						dispatch(addToCart({
+							id, color: selectedColor, size: selectedSize, count
+						}))
+					}
+
+					}>
 						<h2 className={s.title}>{product.title}</h2>
 						<p className={s.price}>руб {product.price}</p>
 						<div className={s.vendorCode}>
@@ -78,12 +101,12 @@ export const ProductPage = () => {
 						</div>
 						<div className={s.color}>
 							<p className={cn(s.subtitle, s.colorTitle)}>Цвет</p>
-							<ColorList colors={product.colors}
+							<ColorList colors={colors}
 								selectedColor={selectedColor}
 								handleColorChange={handleColorChange}
 							/>
 						</div>
-						<ProductSize sizeList={product.size} />
+						<ProductSize sizeList={product.size} handleSizeChange={handleSizeChange} selectedSize={selectedSize} />
 						<div className={s.description}>
 							<p className={cn(s.subtitle, s.descriptionTitle)}>Описание</p>
 							<p className={s.descriptionText}>{product.description}</p>

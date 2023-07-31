@@ -18,7 +18,19 @@ export const fetchCategory = createAsyncThunk(
 		for (const key in param) {
 			url.searchParams.append(key, param[key])
 		}
-		console.log('url: ', url);
+		const responce = await fetch(url);
+		return await responce.json();
+	}
+)
+
+export const fetchAll = createAsyncThunk(
+	"goods/fetchAll",
+	async (param = []) => {
+		const url = new URL(GOODS_URL);
+		for (const key in param) {
+			url.searchParams.append(key, param[key])
+		}
+		url.searchParams.append('count', 'all')
 		const responce = await fetch(url);
 		return await responce.json();
 	}
@@ -68,6 +80,20 @@ const goodsSlice = createSlice({
 			.addCase(fetchCategory.rejected, (state, action) => {
 				state.status = 'failed';
 				state.goodsList = [];
+				state.error = action.error.message;
+			})
+			.addCase(fetchAll.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(fetchAll.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.goodsList = action.payload;
+				state.pages = 0;
+				state.totalCount = null;
+
+			})
+			.addCase(fetchAll.rejected, (state, action) => {
+				state.status = 'failed';
 				state.error = action.error.message;
 			})
 

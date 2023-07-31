@@ -43,7 +43,7 @@
 	}
 
 	&Active {
-		color: #000;
+		color: #07194f;
 
 		&:after {
 			background-color: #000;
@@ -53,9 +53,9 @@
 
 .arrow {
 	color: #000;
-}
 
-.disabled {
-	pointer-events: none;
-	color: #8a8a8a;
+	&:disabled {
+		pointer-events: none;
+		color: #8a8a8a;
+	}
 }
