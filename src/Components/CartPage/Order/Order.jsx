@@ -13,10 +13,10 @@ export const Order = ({ cartItems }) => {
 
 	const validationSchema = Yup.object({
 		fio: Yup.string().required('Заполните ФИО'),
-		address: Yup.string(),
+		address: Yup.string().required('Заполните адрес'),
 		phone: Yup.string().required('Введите номер телефона').matches(/^\+\d{1}\(\d{3}\)\-\d{3}\-\d{4}\$/, 'Некорректный формат'),
 		email: Yup.string().email('Некорректный формат email').required('Заполните email'),
-		delivery: Yup.string(),
+		delivery: Yup.string().required('Выберите способ доставки'),
 	})
 
 	return (
