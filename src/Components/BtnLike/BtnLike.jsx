@@ -1,5 +1,5 @@
 import s from './BtnLike.module.scss'
-// import { ReactComponent as LikeSVG } from '../../../assets/like.svg';
+import { ReactComponent as LikeSVG } from '../../assets/like.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFavorites, removeFromFavorites } from '../../features/favoritesSlice';
 import cn from 'classnames';
