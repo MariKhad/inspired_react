@@ -27,12 +27,12 @@ export const Order = ({ cartItems }) => {
 					initialValues={{
 						fio: 'Vitek',
 						address: 'Kazan',
-						phone: '89046716925',
+						phone: '',
 						email: 'lynx-89@inbox.ru',
 						delivery: 'self',
 					}
 					}
-					onSubmit={handleSubmitOrder}
+					onSubmit={() => console.log('жмяк')}
 					validationSchema={validationSchema}
 					className={s.form}>
 					<Form className={s.form}>
