@@ -1,9 +1,11 @@
 import { Container } from '../../Layout/Container/Container';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import s from './Search.module.scss';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { toggleSearch } from '../../../features/searchSlice';
+
 
 export const Search = () => {
 	const { openSearch } = useSelector(state => state.search);
@@ -12,15 +14,17 @@ export const Search = () => {
 		search: '',
 	}
 
-	const validationSchema = Yup({
+	const validationSchema = Yup.object({
 		search: Yup.string().required('Заполните поле'),
 	})
 
 	const navigate = useNavigate();
-
-	const handleSubmit = ({ search }) => {
+	const dispatch = useDispatch();
+	const handleSubmit = ({ search }, { resetForm }) => {
 		if (search) {
 			navigate(`search?q=${search}`);
+			resetForm();
+			dispatch(toggleSearch(false));
 		}
 	}
 
@@ -32,11 +36,11 @@ export const Search = () => {
 				<Container>
 					<Formik
 						initialValues={initialValues}
-						validationSchema={validationSchema}>
-						onSubmit={handleSubmit}
+						validationSchema={validationSchema}
+						onSubmit={handleSubmit}>
 						<Form className={s.form}>
 							<Field type="search" name="search" className={s.input} placeholder="Найти..." />
-							<ErrorMessage name='search' conponent={'p'} className={s.error} />
+							<ErrorMessage name='search' component={'p'} className={s.error} />
 							<button className={s.btn} type='submit'>искать</button>
 						</Form>
 					</Formik>

@@ -37,7 +37,7 @@ export const Top = () => {
 						<li className={s.navItem}>
 							<NavLink to='/cart' className={s.link}>
 								<CartSVG />
-								FavoritPage copy								<span className={s.linkCount}>{countItems}</span>
+								<span className={s.linkCount}>{countItems}</span>
 							</NavLink>
 						</li>
 						<li className={s.navItem}>
