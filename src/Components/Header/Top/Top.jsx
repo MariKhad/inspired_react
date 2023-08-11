@@ -3,7 +3,7 @@ import s from './Top.module.scss'
 import cn from 'classnames';
 import logo from '/src/assets/logo.svg';
 import { NavLink } from 'react-router-dom';
-import { ReactComponent as LikeSVG } from '../../../assets/like.svg';
+import { ReactComponent as LikeSVG } from '../../../assets/Like.svg';
 import { ReactComponent as SearchSVG } from '../../../assets/search.svg';
 import { ReactComponent as CartSVG } from '../../../assets/cart.svg';
 import { useSelector, useDispatch } from 'react-redux';
