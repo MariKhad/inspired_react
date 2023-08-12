@@ -4,6 +4,7 @@ import { API_URL } from '../../../../../assets/const.js';
 import cn from 'classnames';
 import { Count } from '../../../../Common/Count/Count';
 import { addToCart, removeFromCart } from '../../../../../features/cartSlice';
+import { Img } from '../../../../Common/Img/Img';
 
 export const CartItem = ({ id, color, size, count, goodsList }) => {
 	const { colorList } = useSelector(state => state?.colors);
@@ -19,7 +20,7 @@ export const CartItem = ({ id, color, size, count, goodsList }) => {
 
 	return (
 		<article className={s.item}>
-			<img className={s.image} src={`${API_URL}/${item?.pic}`} alt={`${item?.title}`} />
+			<Img className={s.image} src={`${API_URL}/${item?.pic}`} alt={`${item?.title}`} />
 			<div className={s.content}>
 				<h3 className={s.title}>{item?.title}</h3>
 				<p className={s.price}>руб {item?.price}</p>

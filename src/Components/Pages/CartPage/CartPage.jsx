@@ -26,9 +26,7 @@ export const CartPage = () => {
 		: (
 			<>
 				<Cart cartItems={cartItems} goodsList={goodsList} />
-				{goodsList.length
-					? <Order cartItems={cartItems} />
-					: ''}
+				{!!cartItems.length && <Order cartItems={cartItems} />}
 				{orderStatus === 'success' && <OrderModal />}
 			</>
 		)

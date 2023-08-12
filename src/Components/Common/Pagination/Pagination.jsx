@@ -1,4 +1,4 @@
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import s from './Pagintaion.module.scss';
 import { useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -7,17 +7,17 @@ import { useEffect, useState } from 'react';
 
 
 export const Pagination = () => {
-	const [pagePagination, setPagePagination] = useState('');
+	const [pagePagination, setPagePagination] = useState(1);
 	const pathname = useLocation().pathname;
 	const { page, pages } = useSelector(state => state.goods);
 
 	useEffect(() => {
 		setPagePagination(page)
-	}, [page]);
+	}, [page, setPagePagination]);
 
-	const { gender, category } = useParams();
+	//const { gender, category } = useParams();
 
-	const param = { gender, category };
+	//const param = { gender, category };
 
 	const handlePageChange = newPage => {
 		setPagePagination(newPage)
@@ -38,9 +38,10 @@ export const Pagination = () => {
 	const renderPaginationItems = () => {
 		const paginationItems = [];
 
-		let startPage = pagePagination === pages && pages > 2
+		let startPage = pagePagination === pages && pages >= 3
 			? pagePagination - 2
 			: Math.max(1, pagePagination - 1);
+
 		let endPage = Math.min(startPage + 2, pages);
 
 
@@ -50,7 +51,7 @@ export const Pagination = () => {
 				<li key={i} className={s.item}>
 					<NavLink
 						to={`${pathname}?page=${i}`}
-						className={cn(s.link, i === pagePagination ?? s.linkActive)}
+						className={cn(s.link, i === page ?? s.linkActive)}
 						onClick={() => handlePageChange(i)}>
 						{i}
 					</NavLink>
@@ -60,24 +61,28 @@ export const Pagination = () => {
 		return paginationItems;
 	}
 
-	if (pages > 1) {
-		return (<div className={s.pagination}>
-			<button to={`${pathname}?page=${pagePagination - 1}`}
-				className={s.arrow}
-				onClick={handlePrevPage}
-				disabled={pagePagination <= 2}>
-				&lt;
-			</button>
-			<ul className={s.list}>
-				{renderPaginationItems()}
-			</ul>
-			<button to={`${pathname}?page=${pagePagination + 1}`}
-				className={s.arrow}
-				onClick={handleNextPage}
-				disabled={pagePagination === pages && pagePagination >= pages - 1}
-			>&gt;
-			</button>
-		</div >
+	//to={`${pathname}?page=${pagePagination - 1}`}
+	//to={`${pathname}?page=${pagePagination + 1}`}
+
+	return (
+		pages > 1 && (
+			<div className={s.pagination}>
+				<button
+					className={s.arrow}
+					onClick={handlePrevPage}
+					disabled={pagePagination <= 2}>
+					&lt;
+				</button>
+				<ul className={s.list}>
+					{renderPaginationItems()}
+				</ul>
+				<button
+					className={s.arrow}
+					onClick={handleNextPage}
+					disabled={pagePagination >= pages || pages <= 3}
+				>&gt;
+				</button>
+			</div>
 		)
-	}
-}
+	);
+};

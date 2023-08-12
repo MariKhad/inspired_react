@@ -35,8 +35,9 @@ const cartSlice = createSlice({
 
 			if (item) {
 				item.count = count;
-			} else
+			} else {
 				state.cartItems.push({ id, color, size, count });
+			}
 			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 			state.countItems = state.cartItems.length;
 		},
@@ -48,13 +49,13 @@ const cartSlice = createSlice({
 			if (itemIndex !== -1) {
 				state.cartItems.splice(itemIndex, 1);
 			}
-			localStorage.setItem('cart', JSON.stringify(state));
+			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 			state.countItems = state.cartItems.length;
 		},
 		clearCart(state) {
 			state.cartItems = [];
 
-			localStorage.setItem('cart', JSON.stringify(state));
+			localStorage.setItem('cart', JSON.stringify(state.cartItems));
 			state.countItems = state.cartItems.length;
 			state.orderStatus = 'idle';
 			state.order = {};

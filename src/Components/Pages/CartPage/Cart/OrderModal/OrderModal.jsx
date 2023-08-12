@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import s from './OrderModal.module.scss';
 import { API_URL } from '../../../../../assets/const';
 import { clearCart } from '../../../../../features/cartSlice';
+import { Img } from '../../../../Common/Img/Img';
 
 export const OrderModal = () => {
 	const { order: {
@@ -59,7 +60,7 @@ export const OrderModal = () => {
 						const product = goodsList.find(product => product.id === item.id);
 						return (
 							<li key={`${item.id}${item.color}${item.size}`} className={s.goodsItem}>
-								<img className={s.goodsImg} src={`${API_URL}/${product.pic}`} alt={product.title} />
+								<Img className={s.goodsImg} src={`${API_URL}/${product.pic}`} alt={product.title} />
 								<p className={s.goodsCount}>X{item.count}</p>
 							</li>
 						)

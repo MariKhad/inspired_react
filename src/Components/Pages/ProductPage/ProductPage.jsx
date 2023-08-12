@@ -14,6 +14,7 @@ import { setActiveGender } from "../../../features/navigationSlice";
 import { useMedia } from "react-use";
 import { BtnLike } from "../../Common/BtnLike/BtnLike";
 import { addToCart } from "../../../features/cartSlice";
+import { Img } from "../../Common/Img/Img";
 
 export const ProductPage = () => {
 	const dispatch = useDispatch();
@@ -61,8 +62,9 @@ export const ProductPage = () => {
 
 	const handleColorChange = (e) => {
 		setSelectedColor(e.target.value)
-		console.log('selectedColor: ', selectedColor);
 	}
+
+
 
 	const [selectedSize, setSelectedSize] = useState('');
 
@@ -74,7 +76,13 @@ export const ProductPage = () => {
 		if (colorList?.length && colors?.length) {
 			setSelectedColor(colorList.find(color => color?.id === colors[0]).title);
 		}
-	}, [colorList, colors])
+	}, [colorList, colors]);
+
+	useEffect(() => {
+		if (product.size) {
+			setSelectedSize(product.size[0]);
+		}
+	}, [product.size]);
 
 	useEffect(() => {
 		dispatch(fetchProduct(id))
@@ -84,7 +92,7 @@ export const ProductPage = () => {
 		<>
 			<section className={s.card} >
 				<Container className={s.container}>
-					<img src={`${API_URL}/${product?.pic}`} alt={`${product?.title}`} className={s.image} />
+					<Img src={`${API_URL}/${product?.pic}`} alt={`${product?.title}`} className={s.image} />
 					<form className={s.content} onSubmit={(e) => {
 						e.preventDefault();
 						dispatch(addToCart({

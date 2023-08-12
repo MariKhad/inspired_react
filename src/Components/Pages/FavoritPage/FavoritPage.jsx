@@ -5,21 +5,31 @@ import { useEffect } from "react";
 import { fetchCategory } from "../../../features/goodsSlice";
 import { usePageFromSearchParams } from "../../../hooks/usePageFromSearchParams";
 import s from './FavoritePage.module.scss'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const FavoritePage = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const favorites = useSelector(state => state.favorites);
 
 	const page = usePageFromSearchParams(dispatch);
 
 	useEffect(() => {
-		const param = { list: favorites };
-		if (page) {
-			param.page = page;
+		if (favorites) {
+			const param = { list: favorites };
+
+			const isLastPage = page === Math.ceil((favorites.length + 1) / 12);
+			if (page > 1 && favorites.length % 12 === 0 && isLastPage) {
+				navigate(`/favorite?page=${page - 1}`);
+				return;
+			}
+
+			if (page) {
+				param.page = page;
+			}
+			dispatch(fetchCategory(param))
 		}
-		dispatch(fetchCategory(param))
-	}, [dispatch, favorites, page]);
+	}, [dispatch, favorites, page, navigate]);
 
 	return (
 		<Container>
