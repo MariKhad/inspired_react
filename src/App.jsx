@@ -8,16 +8,16 @@ import {
 }
 	from "react-router-dom";
 import { Root } from "./routes/Root";
-import { MainPage } from "./Components/MainPage/MainPage";
-import { ErrorPage } from "./Components/ErrorPage/ErrorPage";
+import { MainPage } from "./Components/Pages/MainPage/MainPage";
+import { ErrorPage } from "./Components/Pages/ErrorPage/ErrorPage";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchNavigation } from "./features/navigationSlice";
 import { fetchColors } from "./features/colorsSlice";
-import { ProductPage } from "./Components/ProductPage/ProductPage";
-import { CartPage } from "./Components/CartPage/CartPage";
-import { FavoritePage } from "./Components/FavoritPage/FavoritPage";
-import { SearchPage } from "./Components/SearchPage/SearchPage";
+import { ProductPage } from "./Components/Pages/ProductPage/ProductPage";
+import { CartPage } from "./Components/Pages/CartPage/CartPage";
+import { FavoritePage } from "./Components/Pages/FavoritPage/FavoritPage";
+import { SearchPage } from "./Components/Pages/SearchPage/SearchPage";
 
 
 
