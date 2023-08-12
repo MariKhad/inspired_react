@@ -19,6 +19,8 @@ export const MainPage = () => {
 
 	const page = usePageFromSearchParams(dispatch);
 
+	console.log(genderData?.banner);
+
 	useEffect(() => {
 		if (gender) {
 			dispatch(setActiveGender(gender));
@@ -42,6 +44,7 @@ export const MainPage = () => {
 			dispatch(fetchGender(gender));
 		}
 	}, [gender, category, page, dispatch]);
+
 
 
 	return (
