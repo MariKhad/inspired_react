@@ -20,7 +20,7 @@ export const FavoritePage = () => {
 
 			const isLastPage = page === Math.ceil((favorites.length + 1) / 12);
 			if (page > 1 && favorites.length % 12 === 0 && isLastPage) {
-				navigate(`/favorite?page=${page - 1}`);
+				navigate(`/favorites?page=${page - 1}`);
 				return;
 			}
 
